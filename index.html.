@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WSP — Доставка из Китая</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1424;color:#f5f7fa;font-family:Arial,sans-serif;line-height:1.6}
+.wrap{max-width:1080px;margin:auto;padding:24px}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-size:28px;font-weight:900;letter-spacing:3px;color:#c7f36b}
+a{color:inherit;text-decoration:none}
+.btn{display:inline-block;background:#c7f36b;color:#101827;padding:13px 22px;border-radius:10px;font-weight:bold}
+.hero{padding:75px 0 60px}
+.tag{color:#c7f36b;font-weight:bold}
+h1{font-size:clamp(38px,7vw,68px);line-height:1.05;margin:18px 0}
+p{color:#aeb9ca}
+.hero p{font-size:19px;max-width:600px}
+section{padding:45px 0}
+h2{font-size:32px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:#142238;border:1px solid #263751;border-radius:18px;padding:25px}
+.price{font-size:34px;font-weight:900;color:#c7f36b;margin:10px 0}
+.muted{color:#aeb9ca}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.num{font-size:30px;color:#c7f36b;font-weight:bold}
+input{width:100%;padding:14px;border-radius:9px;border:1px solid #43516a;background:#0b1424;color:white;font-size:17px;margin:8px 0 18px}
+label{display:block;margin-top:12px}
+.choice{display:flex;gap:20px;flex-wrap:wrap;margin:12px 0}
+.choice label{display:flex;gap:8px;align-items:center}
+.choice input{width:auto;margin:0}
+.total{font-size:30px;font-weight:bold;color:#c7f36b}
+footer{border-top:1px solid #263751;padding:30px 0;color:#aeb9ca}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="logo">WSP</div>
+<a class="btn" href="https://t.me/wsp_manager">Связаться</a>
+</header>
+
+<main>
+<div class="hero">
+<div class="tag">ДОСТАВКА ИЗ КИТАЯ</div>
+<h1>Твои покупки.<br>Наша доставка.</h1>
+<p>Помогаем доставлять товары из Китая быстро, удобно и по понятным тарифам.</p>
+<a class="btn" href="https://t.me/wsp_manager">Заказать доставку ↗</a>
+</div>
+
+<section>
+<div class="tag">НАШИ ТАРИФЫ</div>
+<h2>Выбери способ доставки</h2>
+<div class="cards">
+<div class="card">
+<h3>🚗 Автодоставка</h3>
+<div class="price">600 ₽/кг</div>
+<p>Выгодный вариант для плановых заказов и объёмных грузов.</p>
+</div>
+<div class="card">
+<h3>✈️ Авиадоставка</h3>
+<div class="price">3 299 ₽/кг</div>
+<p>Когда важна скорость получения заказа.</p>
+</div>
+</div>
+</section>
+
+<section>
+<div class="tag">КАК ЭТО РАБОТАЕТ</div>
+<h2>Всего три шага</h2>
+<div class="steps">
+<div class="card"><div class="num">01</div><h3>Оставь заявку</h3><p>Напиши нашему менеджеру и расскажи о своём заказе.</p></div>
+<div class="card"><div class="num">02</div><h3>Выбери доставку</h3><p>Согласуй способ доставки и детали отправления.</p></div>
+<div class="card"><div class="num">03</div><h3>Получи товар</h3><p>Ожидай прибытия своего заказа.</p></div>
+</div>
+</section>
+
+<section>
+<div class="tag">КАЛЬКУЛЯТОР</div>
+<h2>Рассчитай стоимость</h2>
+<div class="card">
+<label for="weight">Вес груза, кг</label>
+<input id="weight" type="number" min="0.1" step="0.1" value="1">
+<div class="choice">
+<label><input type="radio" name="method" value="600" checked> Авто — 600 ₽/кг</label>
+<label><input type="radio" name="method" value="3299"> Авиа — 3 299 ₽/кг</label>
+</div>
+<p>Предварительная стоимость:</p>
+<div class="total" id="total">600 ₽</div>
+<p class="muted">Расчёт предварительный. Итоговую стоимость и возможные дополнительные расходы уточняйте у менеджера.</p>
+<a class="btn" id="order" href="https://t.me/wsp_manager">Уточнить в Telegram ↗</a>
+</div>
+</section>
+
+<section style="text-align:center">
+<h2>Готов отправить свой груз?</h2>
+<p>Напиши нам — поможем разобраться с доставкой.</p>
+<a class="btn" href="https://t.me/wsp_manager">Написать менеджеру</a>
+</section>
+</main>
+<footer>© WSP — Доставка из Китая</footer>
+</div>
+<script>
+const weight=document.getElementById('weight');
+const total=document.getElementById('total');
+const order=document.getElementById('order');
+function calc(){
+ const w=Math.max(0,Number(weight.value)||0);
+ const rate=Number(document.querySelector('input[name="method"]:checked').value);
+ const sum=w*rate;
+ total.textContent=new Intl.NumberFormat('ru-RU').format(sum)+' ₽';
+ const method=rate===600?'Автодоставка':'Авиадоставка';
+ order.href='https://t.me/wsp_manager?text='+encodeURIComponent('Здравствуйте! Хочу уточнить доставку WSP. Способ: '+method+'. Вес: '+w+' кг. Предварительная стоимость: '+sum+' ₽.');
+}
+weight.addEventListener('input',calc);
+document.querySelectorAll('input[name="method"]').forEach(x=>x.addEventListener('change',calc));
+calc();
+</script>
+</body>
+</html>
